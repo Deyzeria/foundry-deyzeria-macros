@@ -1,0 +1,29 @@
+turn=start,
+applyCondition=floor(@attributes.hp.max/2)>##attributes.hp.value>0,
+damageRoll=4+(@abilities.con.mod*2),
+damageType=healing
+
+turn=start/end 
+allowIncapacitated = true/false
+applyCondition=expression // if present must evaluate to true or rest of the processing will be aborted
+removeCondition=expression
+rollType=check/save/skill
+saveAbility=dex/con/prc(perception)
+saveDC=number
+saveDamage=halfdamage/nodamage/fulldamage
+saveRemove=true/false
+saveMagic=true/false
+actionSave=true/false // If true midi wont roll the save but leave it to the player
+damageBeforeSave=true/false
+damageRoll=expression
+damageType=piercing/bludgeoning/healing/temphp
+rollMode=one of gmroll, blindroll, publicroll, selfroll and the rollmode will be applied to the overtime item roll.
+macro="World Macro Name"
+label=string
+
+Stackable effects
+
+You can refer to ##/@stackCount 
+for stackable effects which can be used in active effect evaluation. 
+Since you almost always want to refer to the stackCount on the target, for non-passive effects remember to use ##stackCount 
+so it will evaluate on the target not the caster/attacker and for passive effects @stackCount.
