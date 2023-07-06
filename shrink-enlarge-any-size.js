@@ -1,6 +1,6 @@
 const initialSize = 1;
 const targetSize = 2;
-const newSize = token.data.width === initialSize ? targetSize : initialSize;
+const newSize = token.document.width === initialSize ? targetSize : initialSize;
 await token.document.update({width: newSize, height: newSize});
 
 // Add this to the code if you also want to change the actual size in the token. 
