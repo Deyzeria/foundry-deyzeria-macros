@@ -1,12 +1,12 @@
 var data = args[0];
-if (data.castData?.castLevel < 1) return;
+if (data.castData?.castLevel < 1 || data.castData?.castLevel == undefined) return;
 if (token.actor.flags.dnd5e.casterType == "versatile") return;
 
 let tempLocation = {
   x: token.document.x + 50,
   y: token.document.y + 50,
 }
-let aoeId = await warpgate.spawnAt(tempLocation, "Positive");
+let aoeId = await warpgate.spawnAt(tempLocation, "AuraEffect");
 
 let aoeActor = canvas.tokens.placeables.find(t => t.id == aoeId);
 
@@ -18,16 +18,16 @@ const newAura = Auras.newAura();
 newAura.distance = data.castData.castLevel * 5;
 newAura.opacity = 0.1;
 switch (token.actor.flags.dnd5e.casterType) {
-  case "holy":
+  case "thalergic":
     newAura.colour = "#f7ff17";
     valueChange = 1;
-    changeName = "Holy-";
+    changeName = "Thalergic-";
     break;
 
-  case "unholy":
+  case "thanurgic":
     newAura.colour = "#8a0012";
     valueChange = -1;
-    changeName = "Unholy-";
+    changeName = "Thanurgic-";
     break;
 
   default:
@@ -49,7 +49,7 @@ const effect = {
       isAura: true,
       aura: "All",
       radius: data.castData.castLevel * 5,
-      customCheck: "actor.flags.dnd5e.isCaster == true",
+      customCheck: "actor.flags.dnd5e.isNotCaster == false || actor.flags.dnd5e.isNotCaster == undefined",
       displayTemp: false
     },
     dae: {
